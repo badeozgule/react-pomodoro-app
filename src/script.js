@@ -1093,6 +1093,11 @@ class App extends React.Component {
    
   componentDidMount() {
     window.addEventListener('resize', this.resizeListener);
+    this.updateThemeColorMetaTag();
+    console.log("============================================================");
+    console.log("🎉 React Pomodoro App project picked by CodePen team! 27.12.2023 🎉");
+    console.log("🎨 Designed and developed by Bade Ozgule 👩‍💻");
+    console.log("============================================================");
   }
   
   componentWillUnmount() {

@@ -1,6 +1,7 @@
 # React Pomodoro App - 25+5 Clock
 
-A Pen created by Bade Ozgule on CodePen.io. Original URL: [https://codepen.io/badeozgule/pen/yLRXPpy](https://codepen.io/badeozgule/pen/yLRXPpy).
+React Pomodoro App, developed by Bade Ozgule on CodePen, is on trend after being picked by the CodePen team on 27.12.2023! 🎉
+Original URL: [https://codepen.io/badeozgule/pen/yLRXPpy](https://codepen.io/badeozgule/pen/yLRXPpy).
 
 # Build Process
 
