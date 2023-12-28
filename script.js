@@ -1021,6 +1021,8 @@ class App extends React.Component {
       }, () => {
         this.setState({
           selectedTheme: childData === "auto" ? this.state.autoModeTheme : childData
+        }, () => {
+          this.updateThemeColorMetaTag(this.state.selectedTheme);
         });
       });
     });
@@ -1187,6 +1189,25 @@ class App extends React.Component {
         slideItemSelection: childData
       });
     });
+    _defineProperty(this, "updateThemeColorMetaTag", val => {
+      const {
+        selectedTheme,
+        autoModeTheme,
+        isAutoModeThemeActive
+      } = this.state;
+      const color = !!val ? val : selectedTheme;
+      const dynamicColor = color === "blue" ? "#03003d" : color === "red" ? "#29003d" : color === "green" ? "#001b3d" : "#fff";
+      const metaThemeColor = document.querySelector("meta[name=theme-color]");
+      document.body.style.backgroundColor = dynamicColor;
+      if (metaThemeColor) {
+        metaThemeColor.setAttribute("content", dynamicColor);
+      } else {
+        const newMetaTag = document.createElement("meta");
+        newMetaTag.name = "theme-color";
+        newMetaTag.content = dynamicColor;
+        document.head.appendChild(newMetaTag);
+      }
+    });
     this.state = {
       isSettingsOpen: false,
       selectedTheme: "green",
@@ -1212,6 +1233,11 @@ class App extends React.Component {
   }
   componentDidMount() {
     window.addEventListener('resize', this.resizeListener);
+    this.updateThemeColorMetaTag();
+    console.log("============================================================");
+    console.log("🎉 React Pomodoro App project picked by CodePen team! 27.12.2023 🎉");
+    console.log("🎨 Designed and developed by Bade Ozgule 👩‍💻");
+    console.log("============================================================");
   }
   componentWillUnmount() {
     window.removeEventListener('resize', this.resizeListener);
