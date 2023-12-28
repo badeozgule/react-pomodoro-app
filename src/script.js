@@ -1119,19 +1119,19 @@ class App extends React.Component {
   }
   
   handleSelectedTheme = (childData) => {
-    
     this.setState({
       isAutoModeThemeActive: childData === "auto" ?  true : false,
     }, ()=> {
       this.setState({
         selectedTheme: childData === "auto" ?  this.state.autoModeTheme : childData,
+      }, () => {
+        this.updateThemeColorMetaTag(this.state.selectedTheme);
       });
-    });
+    }); 
   }
   
   handleSelectedActiveMode = (childData) => {
-    const {selectedActiveMode,isAutoModeThemeActive,isTimerRunning, sessionFocusCounter, slideItemSelection} = this.state;
-    
+    const {selectedActiveMode,isAutoModeThemeActive,isTimerRunning, sessionFocusCounter, slideItemSelection} = this.state;    
     if (childData === "skip") {
       if(selectedActiveMode !== slideItemSelection) {
 
@@ -1309,6 +1309,22 @@ class App extends React.Component {
     })
   }
   
+  updateThemeColorMetaTag = (val) => {
+    const {selectedTheme, autoModeTheme, isAutoModeThemeActive} = this.state;
+    const color = !!val ? val : selectedTheme;
+    const dynamicColor = color === "blue" ? "#03003d" : color === "red" ? "#29003d" : color === "green" ? "#001b3d" : "#fff";
+
+    const metaThemeColor = document.querySelector("meta[name=theme-color]");
+    document.body.style.backgroundColor = dynamicColor;
+    if (metaThemeColor) {
+      metaThemeColor.setAttribute("content", dynamicColor);
+    } else {
+      const newMetaTag = document.createElement("meta");
+      newMetaTag.name = "theme-color";
+      newMetaTag.content = dynamicColor;
+      document.head.appendChild(newMetaTag);
+    }
+  };
   
   render() {
     const {isResizeActive, isAutoModeThemeActive, selectedTheme} = this.state;
